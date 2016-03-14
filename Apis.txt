@@ -1,0 +1,9 @@
+Buscador de apis http://www.programmableweb.com/apis/directory
+
+
+Google Maps API: Permite incluir mapas. Se puede combinar con información proveniente de otras fuentes.
+Google AJAX Search API: Permite realizar búsquedas en la web: Páginas, videos, lugares en mapa.
+GSSearch: Interfaz base para las búsquedas.
+Gmail API Leer y enviar correos.
+Youtube API: Maneja tu contenido de Youtube.
+Google + Hangouts API:
