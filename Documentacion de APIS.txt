@@ -1,0 +1,3 @@
+http://www.giantbomb.com/api/documentation
+https://developer.valvesoftware.com/wiki/Steam_Web_API
+https://www.youtube.com/yt/dev/es/api-resources.html
