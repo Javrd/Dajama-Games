@@ -2,6 +2,7 @@ package src.server;
 
 import src.client.GreetingService;
 import src.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
