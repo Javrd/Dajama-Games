@@ -1,5 +1,7 @@
 package src.client;
 
+import src.shared.domain.giantBomb.GiantBomb;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -8,5 +10,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-	String greetServer(String name) throws IllegalArgumentException;
+	GiantBomb getGiantBomb(String juego);
 }
