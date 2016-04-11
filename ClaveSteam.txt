@@ -1,0 +1,3 @@
+Tu clave de Web API de Steam
+Clave: 998DC7A01A08F4BA71C140A14C59DC87
+Nombre del Dominio: http://1-dot-dajama-games.appspot.com/
