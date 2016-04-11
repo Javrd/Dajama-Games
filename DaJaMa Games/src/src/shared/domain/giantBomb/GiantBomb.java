@@ -1,19 +1,22 @@
 
-package src.giantBomb;
+package src.shared.domain.giantBomb;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Generated("org.jsonschema2pojo")
-public class GiantBomb {
+public class GiantBomb implements Serializable{
 
     private String error;
     private Integer limit;
     private Integer offset;
-    private Integer numberOfPageResults;
-    private Integer numberOfTotalResults;
-    private Integer statusCode;
+    private Integer number_of_page_results;
+    private Integer number_of_total_results;
+    private Integer status_code;
     private List<Result> results = new ArrayList<Result>();
     private String version;
 
@@ -74,55 +77,55 @@ public class GiantBomb {
     /**
      * 
      * @return
-     *     The numberOfPageResults
-     */
-    public Integer getNumberOfPageResults() {
-        return numberOfPageResults;
-    }
-
-    /**
-     * 
-     * @param numberOfPageResults
      *     The number_of_page_results
      */
-    public void setNumberOfPageResults(Integer numberOfPageResults) {
-        this.numberOfPageResults = numberOfPageResults;
+    public Integer getNumber_of_page_results() {
+        return number_of_page_results;
+    }
+
+    /**
+     * 
+     * @param number_of_page_results
+     *     The number_of_page_results
+     */
+    public void setNumber_of_page_results(Integer number_of_page_results) {
+        this.number_of_page_results = number_of_page_results;
     }
 
     /**
      * 
      * @return
-     *     The numberOfTotalResults
-     */
-    public Integer getNumberOfTotalResults() {
-        return numberOfTotalResults;
-    }
-
-    /**
-     * 
-     * @param numberOfTotalResults
      *     The number_of_total_results
      */
-    public void setNumberOfTotalResults(Integer numberOfTotalResults) {
-        this.numberOfTotalResults = numberOfTotalResults;
+    public Integer getNumber_of_total_results() {
+        return number_of_total_results;
+    }
+
+    /**
+     * 
+     * @param number_of_total_results
+     *     The number_of_total_results
+     */
+    public void setNumber_of_total_results(Integer number_of_total_results) {
+        this.number_of_total_results = number_of_total_results;
     }
 
     /**
      * 
      * @return
-     *     The statusCode
+     *     The status_code
      */
-    public Integer getStatusCode() {
-        return statusCode;
+    public Integer getStatus_code() {
+        return status_code;
     }
 
     /**
      * 
-     * @param statusCode
+     * @param status_code
      *     The status_code
      */
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
+    public void setStatus_code(Integer status_code) {
+        this.status_code = status_code;
     }
 
     /**

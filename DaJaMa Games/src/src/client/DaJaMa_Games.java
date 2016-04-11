@@ -1,23 +1,18 @@
 package src.client;
 
-import src.shared.FieldVerifier;
+import src.shared.domain.giantBomb.GiantBomb;
+import src.shared.domain.giantBomb.Result;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -41,21 +36,74 @@ public class DaJaMa_Games implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
+		final Button boton = new Button("Send");
 		final TextBox buscador = new TextBox();
-		HorizontalPanel panel = new HorizontalPanel();
+		final HorizontalPanel panel = new HorizontalPanel();
 		buscador.setText("Juego a buscar");
 
-		sendButton.addStyleName("sendButton");
+		boton.addStyleName("sendButton");
 
 		panel.add(buscador);
-		panel.add(sendButton);
+		panel.add(boton);
 		
 		RootPanel.get("form").add(panel);
 
 		buscador.setFocus(true);
 		buscador.selectAll();
+		
+		boton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				final String juego = buscador.getText();
+
+				RootPanel.get("giantBomb").clear();
+				
+				greetingService.getGiantBomb(juego, new AsyncCallback<GiantBomb>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						HTML res = new HTML(juego);
+						
+						RootPanel.get().add(res);
+					}
+
+					@Override
+					public void onSuccess(GiantBomb result) {
+						// TODO Auto-generated method stub
+						showGiantBomb(juego, result);
+					}
+					
+				});
+			}
+		});
 
 
 	}
+	
+	
+	private void showGiantBomb(String juego, GiantBomb result){
+		String output = "<fieldset>";
+		output += "<legend>" + juego + " GiantBomb</legend>";
+		
+		if(!result.getResults().isEmpty()){
+			
+			for(Result r: result.getResults()){
+				
+			output += "<p>" +r.getName() + "</p>";
+
+			output += "<img  width='500' heigth='500' src=" +r.getImage().getSmall_url()+ "></img>";
+
+			}
+		}else{
+			output="<span> No results </span>";
+		}
+		output += "</fieldset>";
+		HTML res = new HTML(output);
+		final HorizontalPanel panel2= new HorizontalPanel();
+		panel2.add(res);
+		RootPanel.get("giantBomb").add(panel2);
+	}
+	
 }

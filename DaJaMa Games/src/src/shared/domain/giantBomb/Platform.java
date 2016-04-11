@@ -1,33 +1,36 @@
 
-package src.giantBomb;
+package src.shared.domain.giantBomb;
 
 import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Generated("org.jsonschema2pojo")
-public class Platform {
+public class Platform implements Serializable{
 
-    private String apiDetailUrl;
+    private String api_detail_url;
     private Integer id;
     private String name;
-    private String siteDetailUrl;
+    private String site_detail_url;
     private String abbreviation;
 
     /**
      * 
      * @return
-     *     The apiDetailUrl
+     *     The api_detail_url
      */
-    public String getApiDetailUrl() {
-        return apiDetailUrl;
+    public String getApi_detail_url() {
+        return api_detail_url;
     }
 
     /**
      * 
-     * @param apiDetailUrl
+     * @param api_detail_url
      *     The api_detail_url
      */
-    public void setApiDetailUrl(String apiDetailUrl) {
-        this.apiDetailUrl = apiDetailUrl;
+    public void setApi_detail_url(String api_detail_url) {
+        this.api_detail_url = api_detail_url;
     }
 
     /**
@@ -69,19 +72,19 @@ public class Platform {
     /**
      * 
      * @return
-     *     The siteDetailUrl
+     *     The site_detail_url
      */
-    public String getSiteDetailUrl() {
-        return siteDetailUrl;
+    public String getSite_detail_url() {
+        return site_detail_url;
     }
 
     /**
      * 
-     * @param siteDetailUrl
+     * @param site_detail_url
      *     The site_detail_url
      */
-    public void setSiteDetailUrl(String siteDetailUrl) {
-        this.siteDetailUrl = siteDetailUrl;
+    public void setSite_detail_url(String site_detail_url) {
+        this.site_detail_url = site_detail_url;
     }
 
     /**
