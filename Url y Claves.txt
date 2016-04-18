@@ -1,9 +1,18 @@
 http://1-dot-dajama-games.appspot.com/
 
 
-****Petición GiantBomb**** 878eb07d37b3f10431cf81057b33390df26d8390
-http://www.giantbomb.com/api/search/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&query=%22undertale%22&resources=game
 
-****Peticion Steam**** 998DC7A01A08F4BA71C140A14C59DC87
 
-COMO CONSEGUIR PRECIO DE STEAM: http://stackoverflow.com/questions/13784059/steam-webapi-get-the-price-of-an-app
+****Petición GiantBomb**** clave: 878eb07d37b3f10431cf81057b33390df26d8390
+
+
+http://www.giantbomb.com/api/search/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&query="undertale"&resources=game
+
+
+
+****Peticion Steam**** clave: 998DC7A01A08F4BA71C140A14C59DC87
+
+
+
+COMO CONSEGUIR PRECIO DE STEAM: 
+http://stackoverflow.com/questions/13784059/steam-webapi-get-the-price-of-an-app
