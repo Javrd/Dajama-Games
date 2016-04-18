@@ -9,7 +9,11 @@ import java.io.Serializable;
 @Generated("org.jsonschema2pojo")
 public class Original_game_rating implements Serializable{
 
-    private String api_detail_url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String api_detail_url;
     private Integer id;
     private String name;
 

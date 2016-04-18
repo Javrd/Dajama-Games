@@ -11,7 +11,11 @@ import java.io.Serializable;
 @Generated("org.jsonschema2pojo")
 public class GiantBomb implements Serializable{
 
-    private String error;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String error;
     private Integer limit;
     private Integer offset;
     private Integer number_of_page_results;

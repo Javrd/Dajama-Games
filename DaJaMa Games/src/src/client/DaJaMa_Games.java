@@ -2,6 +2,8 @@ package src.client;
 
 import src.shared.domain.giantBomb.GiantBomb;
 import src.shared.domain.giantBomb.Result;
+import src.shared.domain.steam.App;
+import src.shared.domain.steam.SteamID;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -18,17 +20,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class DaJaMa_Games implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
-
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
+	
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
 
@@ -59,20 +51,52 @@ public class DaJaMa_Games implements EntryPoint {
 
 				RootPanel.get("giantBomb").clear();
 				
+				
 				greetingService.getGiantBomb(juego, new AsyncCallback<GiantBomb>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						HTML res = new HTML(juego);
-						
-						RootPanel.get().add(res);
 					}
 
 					@Override
 					public void onSuccess(GiantBomb result) {
 						// TODO Auto-generated method stub
 						showGiantBomb(juego, result);
+					}
+					
+				});
+				
+				greetingService.getSteamID(new AsyncCallback<SteamID>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+					}
+
+					@Override
+					public void onSuccess(SteamID result) {
+						// TODO Auto-generated method stub
+						Integer abc=0;
+						for(App a: result.getApplist().getApps().getApp()){
+							if(a.getName().equalsIgnoreCase(juego)){
+								abc=a.getAppid();
+							}
+						}
+						greetingService.getSteamPrice(abc,new AsyncCallback<Double>(){
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+							}
+
+							@Override
+							public void onSuccess(Double result) {
+								// TODO Auto-generated method stub
+								showSteamPrice(juego, result);
+							}
+							
+						});
 					}
 					
 				});
@@ -89,13 +113,11 @@ public class DaJaMa_Games implements EntryPoint {
 		
 		if(!result.getResults().isEmpty()){
 			
-			for(Result r: result.getResults()){
-				
-			output += "<p>" +r.getName() + "</p>";
+			Result r = result.getResults().get(0);
 
 			output += "<img  width='500' heigth='500' src=" +r.getImage().getSmall_url()+ "></img>";
 
-			}
+			
 		}else{
 			output="<span> No results </span>";
 		}
@@ -104,6 +126,24 @@ public class DaJaMa_Games implements EntryPoint {
 		final HorizontalPanel panel2= new HorizontalPanel();
 		panel2.add(res);
 		RootPanel.get("giantBomb").add(panel2);
+	}
+	
+	private void showSteamPrice(String juego,Double result){
+		String output = "<fieldset>";
+		output += "<legend>Precio " + juego + " en Steam</legend>";
+		
+		if(result!=null){		
+				
+			output += "<p>" +result + " €</p>";
+			
+		}else{
+			output="<span> No results </span>";
+		}
+		output += "</fieldset>";
+		HTML res = new HTML(output);
+		final HorizontalPanel panel2= new HorizontalPanel();
+		panel2.add(res);
+		RootPanel.get("SteamPrice").add(panel2);
 	}
 	
 }

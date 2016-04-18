@@ -11,7 +11,11 @@ import java.io.Serializable;
 @Generated("org.jsonschema2pojo")
 public class Result implements Serializable{
 
-    private String aliases;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String aliases;
     private String api_detail_url;
     private String date_added;
     private String date_last_updated;
