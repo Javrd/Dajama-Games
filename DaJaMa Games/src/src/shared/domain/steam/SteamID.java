@@ -1,17 +1,16 @@
 
 package src.shared.domain.steam;
 
-import javax.annotation.Generated;
+import java.io.Serializable;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-@Generated("org.jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class SteamID implements Serializable{
-
-    /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-    private Applist applist;
+	private static final long serialVersionUID = -1793668734967446373L;
+	private Applist applist;
 
     /**
      * 

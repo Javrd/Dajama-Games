@@ -1,9 +1,14 @@
 package src.client;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import src.shared.domain.giantBomb.GiantBomb;
 import src.shared.domain.giantBomb.Result;
 import src.shared.domain.steam.App;
 import src.shared.domain.steam.SteamID;
+import src.shared.domain.youtube.Item;
+import src.shared.domain.youtube.YoutubeSearch;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -23,6 +28,8 @@ public class DaJaMa_Games implements EntryPoint {
 	
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
+	
+	private final Map<String, Integer> appMap = getIdMapSteam();
 
 	/**
 	 * This is the entry point method.
@@ -50,6 +57,25 @@ public class DaJaMa_Games implements EntryPoint {
 				final String juego = buscador.getText();
 
 				RootPanel.get("giantBomb").clear();
+				RootPanel.get("youtube").clear();
+				RootPanel.get("SteamPrice").clear();
+				
+				greetingService.getYoutubeSearch(juego, new AsyncCallback<YoutubeSearch>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						HTML res = new HTML(caught.getMessage());
+						RootPanel.get("youtube").add(res);
+						
+					}
+
+					@Override
+					public void onSuccess(YoutubeSearch result) {
+						showYoutubeSearch(juego,result);
+						
+					}
+					
+				});
 				
 				
 				greetingService.getGiantBomb(juego, new AsyncCallback<GiantBomb>(){
@@ -63,34 +89,14 @@ public class DaJaMa_Games implements EntryPoint {
 					public void onSuccess(GiantBomb result) {
 						// TODO Auto-generated method stub
 						showGiantBomb(juego, result);
-					}
-					
-				});
-				
-				greetingService.getSteamID(new AsyncCallback<SteamID>(){
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-					}
-
-					@Override
-					public void onSuccess(SteamID result) {
-						// TODO Auto-generated method stub
-						Integer abc=0;
-						for(App a: result.getApplist().getApps().getApp()){
-							if(a.getName().equalsIgnoreCase(juego)){
-								abc=a.getAppid();
-							}
-						}
-						greetingService.getSteamPrice(abc,new AsyncCallback<Double>(){
+						Integer id = appMap.get(result.getResults().get(0).getName().toLowerCase());
+						greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
 
 							@Override
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 							}
-
-							@Override
+								@Override
 							public void onSuccess(Double result) {
 								// TODO Auto-generated method stub
 								showSteamPrice(juego, result);
@@ -100,8 +106,11 @@ public class DaJaMa_Games implements EntryPoint {
 					}
 					
 				});
-			}
-		});
+				
+					
+				}
+				
+			});
 
 
 	}
@@ -144,6 +153,46 @@ public class DaJaMa_Games implements EntryPoint {
 		final HorizontalPanel panel2= new HorizontalPanel();
 		panel2.add(res);
 		RootPanel.get("SteamPrice").add(panel2);
+	}
+	
+	private void showYoutubeSearch(String juego, YoutubeSearch result){
+		String output = "<fieldset>";
+		output += "<legend>" + juego + " Youtube</legend>";
+		if(!result.getItems().isEmpty()){
+			for(Item r : result.getItems()){
+				output += "<p>" + r.getSnippet().getTitle() + "</p>";
+				output += "<iframe src=https://www.youtube.com/embed/"+r.getId().getVideoId()+" fs=1 allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>";
+				
+			}
+		}else{
+			output = "<span> No results </span>";
+		}
+		output += "</fieldset>";
+		HTML res = new HTML(output);
+		final HorizontalPanel panel3 = new HorizontalPanel();
+		panel3.add(res);
+		RootPanel.get("youtube").add(panel3);
+	}
+	
+	private Map<String, Integer> getIdMapSteam(){
+		final Map<String, Integer> idMap = new HashMap<String,Integer>();
+		greetingService.getSteamID(new AsyncCallback<SteamID>() {
+			
+			@Override
+			public void onSuccess(SteamID result) {
+				for (App a : result.getApplist().getApps()){
+					idMap.put(a.getName().toLowerCase(), a.getAppid());
+				}
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		return idMap;
 	}
 	
 }

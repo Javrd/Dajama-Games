@@ -5,6 +5,7 @@ import org.restlet.resource.ClientResource;
 import src.client.GreetingService;
 import src.shared.domain.giantBomb.GiantBomb;
 import src.shared.domain.steam.SteamID;
+import src.shared.domain.youtube.YoutubeSearch;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -25,7 +26,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public SteamID getSteamID() {
-		ClientResource cr = new ClientResource("http://api.steampowered.com/ISteamApps/GetAppList/v0001/");
+		ClientResource cr = new ClientResource("http://api.steampowered.com/ISteamApps/GetAppList/v2/");
 		SteamID res = cr.get(SteamID.class);
 		return res;
 	}
@@ -36,5 +37,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		String res = cr.get(String.class);
 		Double res2 = Integer.parseInt(res.split(",")[3].split(":")[1])/100.;
 		return res2;
+	}
+	
+	public YoutubeSearch getYoutubeSearch(String juego){
+		ClientResource cr = new ClientResource("https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyD77694C-yaK1scKDrT2Oqx8SPh6Vhe2uM&q=Gameplay "+juego);
+		YoutubeSearch res = cr.get(YoutubeSearch.class);
+		return res;
 	}
 }

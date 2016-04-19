@@ -1,12 +1,17 @@
 
 package src.shared.domain.steam;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class App {
-
-    private Integer appid;
+public class App implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6355843141538433061L;
+	private Integer appid;
     private String name;
 
     /**

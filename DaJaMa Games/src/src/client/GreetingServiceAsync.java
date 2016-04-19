@@ -1,5 +1,6 @@
 package src.client;
 
+import src.shared.domain.youtube.YoutubeSearch;
 import src.shared.domain.giantBomb.GiantBomb;
 import src.shared.domain.steam.SteamID;
 
@@ -15,4 +16,6 @@ public interface GreetingServiceAsync {
 	void getSteamID(AsyncCallback<SteamID> callback);
 
 	void getSteamPrice(Integer id, AsyncCallback<Double> callback);
+	
+	void getYoutubeSearch(String juego, AsyncCallback<YoutubeSearch> callback);
 }
