@@ -1,14 +1,18 @@
 
 package src.shared.domain.steam;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-@Generated("org.jsonschema2pojo")
-public class Applist {
-
-    private List<App> apps = new ArrayList<App>();
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Applist implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4071939062274399430L;
+	private List<App> apps = new ArrayList<App>();
 
     /**
      * 
