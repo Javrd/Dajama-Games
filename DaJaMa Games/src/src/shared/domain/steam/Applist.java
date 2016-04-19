@@ -1,27 +1,21 @@
 
 package src.shared.domain.steam;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
-import java.io.Serializable;
-@JsonIgnoreProperties(ignoreUnknown=true)
 @Generated("org.jsonschema2pojo")
-public class Applist implements Serializable{
+public class Applist {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Apps apps;
+    private List<App> apps = new ArrayList<App>();
 
     /**
      * 
      * @return
      *     The apps
      */
-    public Apps getApps() {
+    public List<App> getApps() {
         return apps;
     }
 
@@ -30,7 +24,7 @@ public class Applist implements Serializable{
      * @param apps
      *     The apps
      */
-    public void setApps(Apps apps) {
+    public void setApps(List<App> apps) {
         this.apps = apps;
     }
 

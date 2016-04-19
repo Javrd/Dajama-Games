@@ -3,19 +3,10 @@ package src.shared.domain.steam;
 
 import javax.annotation.Generated;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
-import java.io.Serializable;
-@JsonIgnoreProperties(ignoreUnknown=true)
 @Generated("org.jsonschema2pojo")
+public class App {
 
-public class App implements Serializable{
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer appid;
+    private Integer appid;
     private String name;
 
     /**
