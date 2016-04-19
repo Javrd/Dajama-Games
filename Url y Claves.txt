@@ -16,3 +16,6 @@ http://www.giantbomb.com/api/search/?api_key=878eb07d37b3f10431cf81057b33390df26
 
 COMO CONSEGUIR PRECIO DE STEAM: 
 http://stackoverflow.com/questions/13784059/steam-webapi-get-the-price-of-an-app
+
+API KEY YOUTUBE:
+AIzaSyD77694C-yaK1scKDrT2Oqx8SPh6Vhe2uM
