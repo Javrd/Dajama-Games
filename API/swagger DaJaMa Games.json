@@ -1,0 +1,104 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DaJaMa Api",
+        "description": "API que ofrece informacion de steeam, giantBomb y youtube sobre juegos a buscar.",
+        "version": "1.0.0"
+    },
+    "host": "1-dot-dajama-games.appspot.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/games": {
+            "get": {
+                "summary": "Lista de Juegos",
+                "description": "Devolverá una lista de juegos con nombre similar al dado. \n",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "query",
+                        "description": "Nombre del juego a buscar",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un array de Juegos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/game"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "game": {
+            "type": "object",
+            "properties": {
+                "steam_id": {
+                    "type": "string",
+                    "description": "Identificador único del juego en steam."
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "Nombre del juego en giantBomb."
+                },
+                "precio": {
+                    "type": "double",
+                    "description": "precio del juego en steam."
+                },
+                "imagen": {
+                    "type": "string",
+                    "description": "URL de la imagen principal del juego en giantBomb."
+                },
+                "youtube_ids": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/youtube_id"
+                    }
+                }
+            }
+        },
+        "youtube_id": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Identificador del video en youtube."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
