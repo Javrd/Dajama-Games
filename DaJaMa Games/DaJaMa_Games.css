@@ -1,0 +1,73 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+#head{
+  font-size: 4em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+  align:center;
+  border-bottom: solid;
+}
+#form{
+	width: 35em;
+	margin:auto;
+	display: top;
+}
+#formCont{
+	width:100%;
+	margin-bottom: 2em;
+}
+.buscador{
+	width:30em;
+	margin:auto;
+	height:2em;
+}
+.boton{
+	margin:auto;
+	height:2.5em;
+	margin-left:0.5em;
+}
+#youtube{
+	float:right;
+}
+#giantBomb{
+	float:left;
+	margin-right: 1em;
+}
+#SteamPrice{
+	float:left;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
