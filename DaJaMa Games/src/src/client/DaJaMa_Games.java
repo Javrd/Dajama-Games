@@ -37,8 +37,9 @@ public class DaJaMa_Games implements EntryPoint {
 	public void onModuleLoad() {
 		final Button boton = new Button("Send");
 		final TextBox buscador = new TextBox();
+		buscador.setStyleName("buscador");
 		final HorizontalPanel panel = new HorizontalPanel();
-		buscador.setText("Juego a buscar");
+		buscador.setText("Game to search");
 
 		boton.addStyleName("sendButton");
 
@@ -49,6 +50,8 @@ public class DaJaMa_Games implements EntryPoint {
 
 		buscador.setFocus(true);
 		buscador.selectAll();
+		
+		boton.setStyleName("boton");
 		
 		boton.addClickHandler(new ClickHandler() {
 			
@@ -117,20 +120,18 @@ public class DaJaMa_Games implements EntryPoint {
 	
 	
 	private void showGiantBomb(String juego, GiantBomb result){
-		String output = "<fieldset>";
-		output += "<legend>" + juego + " GiantBomb</legend>";
+		String output = "";
 		
 		if(!result.getResults().isEmpty()){
 			
 			Result r = result.getResults().get(0);
-
-			output += "<img  width='500' heigth='500' src=" +r.getImage().getSmall_url()+ "></img>";
+			output += r.getName();
+			output += "<br><img  width='500' heigth='500' src=" +r.getImage().getSmall_url()+ "></img>";
 
 			
 		}else{
 			output="<span> No results </span>";
 		}
-		output += "</fieldset>";
 		HTML res = new HTML(output);
 		final HorizontalPanel panel2= new HorizontalPanel();
 		panel2.add(res);
@@ -138,17 +139,15 @@ public class DaJaMa_Games implements EntryPoint {
 	}
 	
 	private void showSteamPrice(String juego,Double result){
-		String output = "<fieldset>";
-		output += "<legend>Precio " + juego + " en Steam</legend>";
+		String output = "";
 		
 		if(result!=null){		
 				
-			output += "<p>" +result + " €</p>";
+			output += "<p> Precio del juego en Steam:<br>" +result + " &#128;</p>";
 			
 		}else{
 			output="<span> No results </span>";
 		}
-		output += "</fieldset>";
 		HTML res = new HTML(output);
 		final HorizontalPanel panel2= new HorizontalPanel();
 		panel2.add(res);
@@ -156,8 +155,7 @@ public class DaJaMa_Games implements EntryPoint {
 	}
 	
 	private void showYoutubeSearch(String juego, YoutubeSearch result){
-		String output = "<fieldset>";
-		output += "<legend>" + juego + " Youtube</legend>";
+		String output = "";
 		if(!result.getItems().isEmpty()){
 			for(Item r : result.getItems()){
 				output += "<p>" + r.getSnippet().getTitle() + "</p>";
@@ -167,7 +165,6 @@ public class DaJaMa_Games implements EntryPoint {
 		}else{
 			output = "<span> No results </span>";
 		}
-		output += "</fieldset>";
 		HTML res = new HTML(output);
 		final HorizontalPanel panel3 = new HorizontalPanel();
 		panel3.add(res);
