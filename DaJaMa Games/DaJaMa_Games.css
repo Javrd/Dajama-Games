@@ -6,9 +6,10 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
-  margin: 40px 0px 70px;
+  margin: 20px 0px 30px;
   text-align: center;
 }
+
 
 #head{
   font-size: 4em;
@@ -33,6 +34,11 @@ h1 {
 	margin:auto;
 	height:2em;
 }
+.tituloBusqueda{
+}
+.busq{
+	clear:left;
+}
 .boton{
 	margin:auto;
 	height:2.5em;
@@ -40,13 +46,23 @@ h1 {
 }
 #youtube{
 	float:right;
+	width:40%;
 }
 #giantBomb{
 	float:left;
-	margin-right: 1em;
+	width: 20%;
 }
-#SteamPrice{
+#principalCont{
 	float:left;
+	width: 36%;
+	margin: 2%;
+}
+#titulo{
+	font-size: 32px;
+	text-shadow: 0 0 3px #FF0000;
+}
+#nombreGB h1{
+	color: red;
 }
 
 .sendButton {
