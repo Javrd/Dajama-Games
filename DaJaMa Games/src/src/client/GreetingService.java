@@ -2,6 +2,7 @@ package src.client;
 
 import src.shared.domain.youtube.YoutubeSearch;
 import src.shared.domain.giantBomb.GiantBomb;
+import src.shared.domain.giantBombGame.GiantBombGame;
 import src.shared.domain.steam.SteamID;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -16,4 +17,5 @@ public interface GreetingService extends RemoteService {
 	SteamID getSteamID();
 	Double getSteamPrice(Integer id);
 	 YoutubeSearch getYoutubeSearch(String juego);
+	GiantBombGame getGiantBombGame(Integer idGB);
 }

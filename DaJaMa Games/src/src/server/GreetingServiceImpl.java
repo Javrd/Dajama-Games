@@ -4,6 +4,7 @@ import org.restlet.resource.ClientResource;
 
 import src.client.GreetingService;
 import src.shared.domain.giantBomb.GiantBomb;
+import src.shared.domain.giantBombGame.GiantBombGame;
 import src.shared.domain.steam.SteamID;
 import src.shared.domain.youtube.YoutubeSearch;
 
@@ -43,5 +44,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		ClientResource cr = new ClientResource("https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyD77694C-yaK1scKDrT2Oqx8SPh6Vhe2uM&q=Gameplay "+juego);
 		YoutubeSearch res = cr.get(YoutubeSearch.class);
 		return res;
+	}
+
+	@Override
+	public GiantBombGame getGiantBombGame(Integer idGB) {
+		ClientResource cr = new ClientResource("http://www.giantbomb.com/api/game/"+idGB+"/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&field_list=genres,name,deck,image,images,platforms,similar_games");
+		GiantBombGame gb = cr.get(GiantBombGame.class);
+		return gb;
 	}
 }
