@@ -1,0 +1,6 @@
+
+http://www.giantbomb.com/api/game/3030-4725/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&field_list=genres,name,deck,image,images,platforms,similar_games
+http://www.giantbomb.com/api/reviews/3030-4725/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&field_list=reviews
+
+
+http://www.giantbomb.com/api/[RESOURCE-TYPE]/[RESOURCE-ID]/?api_key=[YOUR-KEY]&format=[RESPONSE-DATA-FORMAT]&field_list=[COMMA-SEPARATED-LIST-OF-RESOURCE-FIELDS]
