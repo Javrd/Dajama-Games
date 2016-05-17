@@ -1,19 +1,14 @@
 
 package src.shared.domain.giantBomb;
 
-import javax.annotation.Generated;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 import java.io.Serializable;
-@JsonIgnoreProperties(ignoreUnknown=true)
+
+import javax.annotation.Generated;
+
 @Generated("org.jsonschema2pojo")
 public class Image implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String icon_url;
+    private String icon_url;
     private String medium_url;
     private String screen_url;
     private String small_url;
