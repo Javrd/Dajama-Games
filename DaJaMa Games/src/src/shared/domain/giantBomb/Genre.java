@@ -8,7 +8,11 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Genre implements Serializable{
 
-    private String api_detail_url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3638840463894919576L;
+	private String api_detail_url;
     private Integer id;
     private String name;
     private String site_detail_url;

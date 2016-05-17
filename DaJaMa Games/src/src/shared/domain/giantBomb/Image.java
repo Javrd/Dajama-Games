@@ -8,7 +8,11 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Image implements Serializable{
 
-    private String icon_url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3532888234385403699L;
+	private String icon_url;
     private String medium_url;
     private String screen_url;
     private String small_url;

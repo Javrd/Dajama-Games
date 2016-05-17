@@ -8,7 +8,11 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Similar_game implements Serializable{
 
-    private String api_detail_url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8879470082636088472L;
+	private String api_detail_url;
     private Integer id;
     private String name;
     private String site_detail_url;

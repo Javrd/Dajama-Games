@@ -8,7 +8,11 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class GiantBombGame implements Serializable{
 
-    private String error;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 164473780241888380L;
+	private String error;
     private Integer limit;
     private Integer offset;
     private Integer number_of_page_results;
