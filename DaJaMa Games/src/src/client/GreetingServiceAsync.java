@@ -1,8 +1,8 @@
 package src.client;
 
 import src.shared.domain.youtube.YoutubeSearch;
-import src.shared.domain.giantBomb.GiantBomb;
-import src.shared.domain.giantBombGame.GiantBombGame;
+import src.shared.domain.giantBomb.GiantBombGame;
+import src.shared.domain.giantBomb.GiantBombSearch;
 import src.shared.domain.steam.SteamID;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -12,7 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface GreetingServiceAsync {
 
-	void getGiantBomb(String juego, AsyncCallback<GiantBomb> callback);
+	void getGiantBomb(String juego, AsyncCallback<GiantBombSearch> callback);
 
 	void getSteamID(AsyncCallback<SteamID> callback);
 

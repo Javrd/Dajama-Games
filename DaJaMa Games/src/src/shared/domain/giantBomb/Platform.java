@@ -1,19 +1,14 @@
 
 package src.shared.domain.giantBomb;
 
-import javax.annotation.Generated;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 import java.io.Serializable;
-@JsonIgnoreProperties(ignoreUnknown=true)
+
+import javax.annotation.Generated;
+
 @Generated("org.jsonschema2pojo")
 public class Platform implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String api_detail_url;
+    private String api_detail_url;
     private Integer id;
     private String name;
     private String site_detail_url;
