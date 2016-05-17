@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Image implements Serializable{
+public class Image_ implements Serializable{
 
     private String icon_url;
     private String medium_url;
@@ -15,6 +15,7 @@ public class Image implements Serializable{
     private String super_url;
     private String thumb_url;
     private String tiny_url;
+    private String tags;
 
     /**
      * 
@@ -140,6 +141,24 @@ public class Image implements Serializable{
      */
     public void setTiny_url(String tiny_url) {
         this.tiny_url = tiny_url;
+    }
+
+    /**
+     * 
+     * @return
+     *     The tags
+     */
+    public String getTags() {
+        return tags;
+    }
+
+    /**
+     * 
+     * @param tags
+     *     The tags
+     */
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
 }

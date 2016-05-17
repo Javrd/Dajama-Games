@@ -6,13 +6,12 @@ import java.io.Serializable;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Platform implements Serializable{
+public class Similar_game implements Serializable{
 
     private String api_detail_url;
     private Integer id;
     private String name;
     private String site_detail_url;
-    private String abbreviation;
 
     /**
      * 
@@ -84,24 +83,6 @@ public class Platform implements Serializable{
      */
     public void setSite_detail_url(String site_detail_url) {
         this.site_detail_url = site_detail_url;
-    }
-
-    /**
-     * 
-     * @return
-     *     The abbreviation
-     */
-    public String getAbbreviation() {
-        return abbreviation;
-    }
-
-    /**
-     * 
-     * @param abbreviation
-     *     The abbreviation
-     */
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
     }
 
 }
