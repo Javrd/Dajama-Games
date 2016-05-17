@@ -10,7 +10,11 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Results implements Serializable{
 
-    private String deck;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6143729388158648456L;
+	private String deck;
     private Image image;
     private String name;
     private List<Platform> platforms = new ArrayList<Platform>();
