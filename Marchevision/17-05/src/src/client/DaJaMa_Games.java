@@ -45,6 +45,7 @@ public class DaJaMa_Games implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button botonCabecera = new Button("DaJaMa Games");
+		botonCabecera.setStyleName("gwt-HeaderButton");
 		botonCabecera.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -200,7 +201,7 @@ public class DaJaMa_Games implements EntryPoint {
 					panel7.add(similar);
 					RootPanel.get("similar").add(panel7);
 					
-					output = "Imágenes: <br>";
+					output = "Imï¿½genes: <br>";
 					List<Image_> listaImagenes = result.getResults().getImages();
 					for(Image_ imagenc: listaImagenes){
 						output+="<br>"+imagenc.getMedium_url();
@@ -281,7 +282,7 @@ public class DaJaMa_Games implements EntryPoint {
 		final TextBox buscador = new TextBox();
 		buscador.setStyleName("buscador");
 		final HorizontalPanel panel = new HorizontalPanel();
-		buscador.setText("Game to search");
+		buscador.getElement().setPropertyString("placeholder", "Game to search");
 
 		boton.addStyleName("sendButton");
 
@@ -301,6 +302,16 @@ public class DaJaMa_Games implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				params.put("juego", buscador.getText());
 				controlador("busqueda");
+			}
+		});
+		buscador.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				if (event.getNativeKeyCode()==KeyCodes.KEY_ENTER){
+					params.put("juego", buscador.getText());
+					controlador("busqueda");
+				}
 			}
 		});
 		
