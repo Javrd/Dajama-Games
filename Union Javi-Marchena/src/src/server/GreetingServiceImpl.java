@@ -3,8 +3,8 @@ package src.server;
 import org.restlet.resource.ClientResource;
 
 import src.client.GreetingService;
-import src.shared.domain.giantBomb.GiantBomb;
-import src.shared.domain.giantBombGame.GiantBombGame;
+import src.shared.domain.giantBomb.GiantBombGame;
+import src.shared.domain.giantBomb.GiantBombSearch;
 import src.shared.domain.steam.SteamID;
 import src.shared.domain.youtube.YoutubeSearch;
 
@@ -18,10 +18,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
 	@Override
-	public GiantBomb getGiantBomb(String juego) {
+	public GiantBombSearch getGiantBomb(String juego) {
 		ClientResource cr = new ClientResource("http://www.giantbomb.com/api/search/?api_key=878eb07d37b3f10431cf81057b33390df26d8390&format=json&query=\""+juego+"\"&resources=game");
 		//System.out.println(cr.get(String.class));
-		GiantBomb res = cr.get(GiantBomb.class);
+		GiantBombSearch res = cr.get(GiantBombSearch.class);
 		return res;
 	}
 

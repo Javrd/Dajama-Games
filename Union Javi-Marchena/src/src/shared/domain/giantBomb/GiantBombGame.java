@@ -1,27 +1,20 @@
 
 package src.shared.domain.giantBomb;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 import java.io.Serializable;
-@JsonIgnoreProperties(ignoreUnknown=true)
-@Generated("org.jsonschema2pojo")
-public class GiantBomb implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String error;
+import javax.annotation.Generated;
+
+@Generated("org.jsonschema2pojo")
+public class GiantBombGame implements Serializable{
+
+    private String error;
     private Integer limit;
     private Integer offset;
     private Integer number_of_page_results;
     private Integer number_of_total_results;
     private Integer status_code;
-    private List<Result> results = new ArrayList<Result>();
+    private Results results;
     private String version;
 
     /**
@@ -137,7 +130,7 @@ public class GiantBomb implements Serializable{
      * @return
      *     The results
      */
-    public List<Result> getResults() {
+    public Results getResults() {
         return results;
     }
 
@@ -146,7 +139,7 @@ public class GiantBomb implements Serializable{
      * @param results
      *     The results
      */
-    public void setResults(List<Result> results) {
+    public void setResults(Results results) {
         this.results = results;
     }
 

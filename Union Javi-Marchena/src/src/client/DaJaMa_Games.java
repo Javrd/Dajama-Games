@@ -1,12 +1,16 @@
 package src.client;
 
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import src.shared.domain.giantBomb.GiantBomb;
+import src.shared.domain.giantBomb.Genre;
+import src.shared.domain.giantBomb.GiantBombSearch;
+import src.shared.domain.giantBomb.GiantBombGame;
+import src.shared.domain.giantBomb.Image_;
+import src.shared.domain.giantBomb.Platform;
 import src.shared.domain.giantBomb.Result;
-import src.shared.domain.giantBombGame.*;
+import src.shared.domain.giantBomb.Similar_game;
 import src.shared.domain.steam.App;
 import src.shared.domain.steam.SteamID;
 import src.shared.domain.youtube.Item;
@@ -17,9 +21,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -44,7 +45,6 @@ public class DaJaMa_Games implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button botonCabecera = new Button("DaJaMa Games");
-		botonCabecera.setStyleName("gwt-HeaderButton");
 		botonCabecera.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -137,29 +137,29 @@ public class DaJaMa_Games implements EntryPoint {
 			@Override
 			public void onSuccess(GiantBombGame result) {
 				// TODO Auto-generated method stub
-				params.put("juego", result.results.name);
+				params.put("juego", result.getResults().getName());
 				String output ="<h1>"+params.get("juego")+"</h1>";
 				HTML res = new HTML(output);
 				final HorizontalPanel panel2= new HorizontalPanel();
 				panel2.add(res);
 				RootPanel.get("nombreGB").add(panel2);								
 				
-				output ="<img width=200 height=200 src="+result.results.image.medium_url+"></img>";
+				output ="<img width=200 height=200 src="+result.getResults().getImage().getMedium_url()+"></img>";
 				res = new HTML(output);
 				final HorizontalPanel panel3= new HorizontalPanel();
 				panel3.add(res);
 				RootPanel.get("giantBomb").add(panel3);	
 				
-				output ="Description: <br>"+result.results.deck;
+				output ="Description: <br>"+result.getResults().getDeck();
 				res = new HTML(output);
 				final HorizontalPanel panel4= new HorizontalPanel();
 				panel4.add(res);
 				RootPanel.get("descripcion").add(panel4);
 				
 				output="Platforms:<br>";
-				int i = result.results.platforms.size();
-				for(Platform p: result.results.platforms){
-					output +=p.name.toString();
+				int i = result.getResults().getPlatforms().size();
+				for(Platform p: result.getResults().getPlatforms()){
+					output +=p.getName().toString();
 					if(i!=1){
 						output+=", ";
 					}
@@ -171,9 +171,9 @@ public class DaJaMa_Games implements EntryPoint {
 				RootPanel.get("plat").add(panel5);	
 				
 				output="Genres: <br>";
-				i = result.results.genres.size();
-				for(Genre g: result.results.genres){
-					output +=g.name.toString();
+				i = result.getResults().getGenres().size();
+				for(Genre g: result.getResults().getGenres()){
+					output +=g.getName();
 					if(i!=1){
 						output+=", ";
 					}
@@ -184,14 +184,14 @@ public class DaJaMa_Games implements EntryPoint {
 				panel6.add(res);
 				RootPanel.get("genres").add(panel6);	
 				
-				for(final Similar_game g: result.results.similar_games){
-					final Button similar = new Button(g.name);
+				for(final Similar_game g: result.getResults().getSimilar_games()){
+					final Button similar = new Button(g.getName());
 					similar.addClickHandler(new ClickHandler() {
 						
 						@Override
 						public void onClick(ClickEvent event) {
-							params.put("idGB", g.id+"");
-							params.put("juego", g.name);
+							params.put("idGB", g.getId()+"");
+							params.put("juego", g.getName());
 							controlador("principal");
 							
 						}
@@ -199,7 +199,19 @@ public class DaJaMa_Games implements EntryPoint {
 					final HorizontalPanel panel7= new HorizontalPanel();
 					panel7.add(similar);
 					RootPanel.get("similar").add(panel7);
+					
+					output = "Imágenes: <br>";
+					List<Image_> listaImagenes = result.getResults().getImages();
+					for(Image_ imagenc: listaImagenes){
+						output+="<br>"+imagenc.getMedium_url();
+					}
 				}
+				
+				res = new HTML(output);
+				final HorizontalPanel panel8= new HorizontalPanel();
+				panel8.add(res);
+				RootPanel.get("slide").add(panel8);
+				
 				
 				Integer id = appMap.get(params.get("juego").toLowerCase());
 				greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
@@ -269,7 +281,7 @@ public class DaJaMa_Games implements EntryPoint {
 		final TextBox buscador = new TextBox();
 		buscador.setStyleName("buscador");
 		final HorizontalPanel panel = new HorizontalPanel();
-		buscador.getElement().setPropertyString("placeholder", "Game to search");
+		buscador.setText("Game to search");
 
 		boton.addStyleName("sendButton");
 
@@ -291,22 +303,13 @@ public class DaJaMa_Games implements EntryPoint {
 				controlador("busqueda");
 			}
 		});
-		buscador.addKeyUpHandler(new KeyUpHandler() {
-			
-			@Override
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode()==KeyCodes.KEY_ENTER){
-					params.put("juego", buscador.getText());
-					controlador("busqueda");
-				}
-			}
-		});
+		
 	}
 
 
 	private void showBusqueda() {
 		final String juego= params.get("juego");
-		greetingService.getGiantBomb(juego, new AsyncCallback<GiantBomb>(){
+		greetingService.getGiantBomb(juego, new AsyncCallback<GiantBombSearch>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -314,7 +317,7 @@ public class DaJaMa_Games implements EntryPoint {
 			}
 
 			@Override
-			public void onSuccess(GiantBomb result) {
+			public void onSuccess(GiantBombSearch result) {
 				// TODO Auto-generated method stub
 				String output = "";
 				HTML res;
