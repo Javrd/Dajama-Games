@@ -23,10 +23,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -45,6 +47,7 @@ public class DaJaMa_Games implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		
 		final Button botonCabecera = new Button("DaJaMa Games");
 		botonCabecera.setStyleName("gwt-HeaderButton");
 		botonCabecera.addClickHandler(new ClickHandler() {
@@ -87,42 +90,42 @@ public class DaJaMa_Games implements EntryPoint {
 	
 	private void controlador(String token){
 		if(token=="busqueda"){
-			RootPanel.get("plat").clear();
-			RootPanel.get("genres").clear();
+			RootPanel.get("busquedaCont").clear();
 			RootPanel.get("giantBomb").clear();
-			RootPanel.get("youtube").clear();
+			RootPanel.get("nombreGB").clear();
 			RootPanel.get("SteamPrice").clear();
 			RootPanel.get("descripcion").clear();
-			RootPanel.get("nombreGB").clear();
-			RootPanel.get("busquedaCont").clear();
+			RootPanel.get("plat").clear();
+			RootPanel.get("genres").clear();
 			RootPanel.get("similar").clear();
-			RootPanel.get("slide").clear();
+			RootPanel.get("slider").clear();
+			RootPanel.get("youtube").clear();
 			showBusqueda();
 		}else if(token=="principal"){
-			RootPanel.get("plat").clear();
-			RootPanel.get("genres").clear();
-			RootPanel.get("giantBomb").clear();
-			RootPanel.get("youtube").clear();
-			RootPanel.get("SteamPrice").clear();
-			RootPanel.get("descripcion").clear();
-			RootPanel.get("nombreGB").clear();
 			RootPanel.get("form").clear();
 			RootPanel.get("busquedaCont").clear();
+			RootPanel.get("giantBomb").clear();
+			RootPanel.get("nombreGB").clear();
+			RootPanel.get("SteamPrice").clear();
+			RootPanel.get("descripcion").clear();
+			RootPanel.get("plat").clear();
+			RootPanel.get("genres").clear();
 			RootPanel.get("similar").clear();
-			RootPanel.get("slide").clear();
+			RootPanel.get("slider").clear();
+			RootPanel.get("youtube").clear();
 			showPrincipal();
 		}else if(token=="inicio"){
-			RootPanel.get("plat").clear();
-			RootPanel.get("genres").clear();
+			RootPanel.get("form").clear();
+			RootPanel.get("busquedaCont").clear();
 			RootPanel.get("giantBomb").clear();
-			RootPanel.get("similar").clear();
-			RootPanel.get("youtube").clear();
+			RootPanel.get("nombreGB").clear();
 			RootPanel.get("SteamPrice").clear();
 			RootPanel.get("descripcion").clear();
-			RootPanel.get("nombreGB").clear();
-			RootPanel.get("busquedaCont").clear();
-			RootPanel.get("form").clear();
-			RootPanel.get("slide").clear();
+			RootPanel.get("plat").clear();
+			RootPanel.get("genres").clear();
+			RootPanel.get("similar").clear();
+			RootPanel.get("slider").clear();
+			RootPanel.get("youtube").clear();
 			showInicio();
 			
 		}
@@ -145,21 +148,21 @@ public class DaJaMa_Games implements EntryPoint {
 				params.put("juego", result.getResults().getName());
 				String output ="<h1>"+params.get("juego")+"</h1>";
 				HTML res = new HTML(output);
-				final HorizontalPanel panel2= new HorizontalPanel();
-				panel2.add(res);
-				RootPanel.get("nombreGB").add(panel2);								
+				HorizontalPanel panel= new HorizontalPanel();
+				panel.add(res);
+				RootPanel.get("nombreGB").add(panel);								
 				
-				output ="<img width=200 height=200 src="+result.getResults().getImage().getMedium_url()+"></img>";
+				output ="<img width=200 height=231.33 src="+result.getResults().getImage().getMedium_url()+"></img>";
 				res = new HTML(output);
-				final HorizontalPanel panel3= new HorizontalPanel();
-				panel3.add(res);
-				RootPanel.get("giantBomb").add(panel3);	
+				panel= new HorizontalPanel();
+				panel.add(res);
+				RootPanel.get("giantBomb").add(panel);	
 				
 				output ="Description: <br>"+result.getResults().getDeck();
 				res = new HTML(output);
-				final HorizontalPanel panel4= new HorizontalPanel();
-				panel4.add(res);
-				RootPanel.get("descripcion").add(panel4);
+				panel= new HorizontalPanel();
+				panel.add(res);
+				RootPanel.get("descripcion").add(panel);
 				
 				output="Platforms:<br>";
 				int i = result.getResults().getPlatforms().size();
@@ -171,9 +174,9 @@ public class DaJaMa_Games implements EntryPoint {
 					i--;
 				}
 				res = new HTML(output);
-				final HorizontalPanel panel5= new HorizontalPanel();
-				panel5.add(res);
-				RootPanel.get("plat").add(panel5);	
+				panel= new HorizontalPanel();
+				panel.add(res);
+				RootPanel.get("plat").add(panel);	
 				
 				output="Genres: <br>";
 				i = result.getResults().getGenres().size();
@@ -185,12 +188,13 @@ public class DaJaMa_Games implements EntryPoint {
 					i--;
 				}				
 				res = new HTML(output);
-				final HorizontalPanel panel6= new HorizontalPanel();
-				panel6.add(res);
-				RootPanel.get("genres").add(panel6);	
+				panel= new HorizontalPanel();
+				panel.add(res);
+				RootPanel.get("genres").add(panel);	
 				
 				for(final Similar_game g: result.getResults().getSimilar_games()){
 					final Button similar = new Button(g.getName());
+					similar.addStyleName("list-group-item");
 					similar.addClickHandler(new ClickHandler() {
 						
 						@Override
@@ -201,23 +205,44 @@ public class DaJaMa_Games implements EntryPoint {
 							
 						}
 					});
-					final HorizontalPanel panel7= new HorizontalPanel();
-					panel7.add(similar);
-					RootPanel.get("similar").add(panel7);
-					
-					output = "Im�genes: <br>";
-					List<Image_> listaImagenes = result.getResults().getImages();
-					for(Image_ imagenc: listaImagenes){
-						output+="<br>"+imagenc.getMedium_url();
-					}
+					RootPanel.get("similar").add(similar);
 				}
 				
+				/* Carousel Bootstrap */
+
+				output = "<div id='gameImages' class='carousel slide' data-ride='carousel'>";
+				
+					output += "<div class='carousel-inner' role='listbox'>";
+						List<Image_> listaImagenes = result.getResults().getImages();
+						Boolean primero = true;
+						for(Image_ imagenc: listaImagenes){
+							if (primero){
+								output += "<div class='item active'>";
+								primero = false;
+							} else {
+								output += "<div class='item'>";
+							}
+							output +="<img class='img-responsive center-block' src='"+ imagenc.getMedium_url() +"'></img>";		
+							output += "</div>";	
+						}
+
+					output += "</div>";
+				
+				output += "<a class='left carousel-control' href='#gameImages' role='button' data-slide='prev'>";
+				output += "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>";
+				output += "<span class='sr-only'>Previous</span>";
+				output += "</a>";
+				output += "<a class='right carousel-control' href='#gameImages' role='button' data-slide='next'>";
+				output += "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>";
+				output += "<span class='sr-only'>Next</span>";
+				output += "</a>";
+
+				output += "</div>";
+				
 				res = new HTML(output);
-				final HorizontalPanel panel8= new HorizontalPanel();
-				panel8.add(res);
-				RootPanel.get("slide").add(panel8);
+				RootPanel.get("slider").add(res);
 				
-				
+				/*************************/
 				Integer id = appMap.get(params.get("juego").toLowerCase());
 				greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
 
@@ -339,8 +364,9 @@ public class DaJaMa_Games implements EntryPoint {
 				if(!result.getResults().isEmpty()){
 					for(final Result r: result.getResults()){
 
-					final HorizontalPanel panel2= new HorizontalPanel();
-					final Button boton2 = new Button(r.getName());
+					HorizontalPanel panel1= new HorizontalPanel();
+					HorizontalPanel panel2= new HorizontalPanel();
+					Button boton2 = new Button(r.getName());
 					boton2.setStyleName("tituloBusqueda");
 					boton2.addClickHandler(new ClickHandler() {
 						
@@ -354,9 +380,10 @@ public class DaJaMa_Games implements EntryPoint {
 					});
 					output = "<div class='busq'>" +r.getDeck()+ "</div>";
 					res = new HTML(output);				
-					panel2.add(boton2);
+					panel1.add(boton2);
 					panel2.add(res);
 
+					RootPanel.get("busquedaCont").add(panel1);
 					RootPanel.get("busquedaCont").add(panel2);
 					}
 				}else{

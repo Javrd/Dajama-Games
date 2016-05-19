@@ -1,0 +1,154 @@
+/** Add css rules here for your application. */
+.gwt-HeaderButton {
+	font-size: 4em;
+	text-decoration: none;
+	border: none;
+	background-color: transparent;
+	font-weight: bold;
+	color: #777777;
+}
+
+.gwt-HeaderButton:FOCUS {
+	outline-width: 0;
+}
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 20px 0px 30px;
+}
+
+#head {
+	font-size: 4em;
+	width: 8em;
+	margin: auto;
+}
+
+#headCont {
+	color: #777777;
+	margin: 40px 0 70px;
+	border-bottom: solid;
+	
+}
+
+#form {
+	width: 35em;
+	margin: auto;
+}
+
+#formCont {
+	width: 100%;
+	margin-bottom: 2em;
+}
+
+#busquedaCont {
+	width: 50em;
+	margin-top: 4em;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+.buscador {
+	width: 30em;
+	margin: auto;
+	height: 2em;
+}
+
+.tituloBusqueda {
+	text-decoration: none;
+	text-align: left;
+	border: none;
+	background-color: transparent;
+	color: #1a0dab;
+    font-size: 1.5em;
+    font-style: bold;
+    padding: 0;
+}
+
+.busq{
+	margin-bottom: 1.4em;
+    color: #545454;
+	
+}
+
+.tituloBusqueda:FOCUS {
+	outline-width: 0;
+}
+
+.tituloBusqueda:HOVER {
+    text-decoration: underline;
+}
+
+.busq {
+	clear: left;
+}
+
+.boton {
+	margin: auto;
+	height: 2.5em;
+	margin-left: 0.5em;
+}
+
+#youtube {
+	float: right;
+	width: 40%;
+}
+
+#principalCont {
+	float: left;
+	width: 56%;
+	margin: 2%;
+}
+
+#cabecera{
+	margin-bottom: 2em;
+}
+
+#giantBomb {
+	float: left;
+	width: 30%;
+}
+
+#detalles{
+	float: left;
+	width: 70%;
+}
+
+#titulo {
+	font-size: 32px;
+	text-shadow: 0 0 3px #FF0000;
+}
+
+#nombreGB h1 {
+	color: red;
+	margin-top:0em;
+}
+
+.sendButton {
+	display: block;
+	font-size: 16pt;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+	width: 400px;
+}
+
+.dialogVPanel {
+	margin: 5px;
+}
+
+.serverResponseLabelError {
+	color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+	margin: 15px 6px 6px;
+}
