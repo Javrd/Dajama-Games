@@ -1,4 +1,4 @@
-/** Add css rules here for your application. */
+
 .gwt-HeaderButton {
 	font-size: 4em;
 	text-decoration: none;
@@ -12,7 +12,16 @@
 	outline-width: 0;
 }
 
-/** Example rules used by the template application (remove for your app) */
+body{
+	background: rgb(240,240,240); /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left top, rgb(190,190,190), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom right, rgb(190,190,190), rgb(245,245,245)); /* Standard syntax */
+	background-repeat: no-repeat; 
+	min-height: 100%;
+}
+
 h1 {
 	font-size: 2em;
 	font-weight: bold;
@@ -56,15 +65,23 @@ h1 {
 	height: 2em;
 }
 
-.tituloBusqueda {
+.tituloBusqueda, .juegosSimilares{
 	text-decoration: none;
 	text-align: left;
 	border: none;
 	background-color: transparent;
 	color: #1a0dab;
-    font-size: 1.5em;
     font-style: bold;
     padding: 0;
+}
+
+.tituloBusqueda {
+    font-size: 1.5em;
+}
+
+.juegosSimilares{
+	display: block;
+    font-size: 1em;
 }
 
 .busq{
@@ -73,11 +90,11 @@ h1 {
 	
 }
 
-.tituloBusqueda:FOCUS {
+.tituloBusqueda:FOCUS, .juegosSimilares:FOCUS {
 	outline-width: 0;
 }
 
-.tituloBusqueda:HOVER {
+.tituloBusqueda:HOVER, .juegosSimilares:HOVER {
     text-decoration: underline;
 }
 
@@ -104,6 +121,7 @@ h1 {
 
 #cabecera{
 	margin-bottom: 2em;
+	min-height: 231px;
 }
 
 #giantBomb {
@@ -121,6 +139,10 @@ h1 {
 	text-shadow: 0 0 3px #FF0000;
 }
 
+#slider {
+	margin: 1.5em 0 1.5em;
+}
+
 #nombreGB h1 {
 	color: red;
 	margin-top:0em;
@@ -129,10 +151,6 @@ h1 {
 .sendButton {
 	display: block;
 	font-size: 16pt;
-}
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
 }
 
 /** Most GWT widgets already have a style name defined */
@@ -148,7 +166,7 @@ h1 {
 	color: red;
 }
 
-/** Set ids using widget.getElement().setId("idOfElement") */
+
 #closeButton {
 	margin: 15px 6px 6px;
 }
