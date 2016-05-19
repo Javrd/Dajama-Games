@@ -192,9 +192,16 @@ public class DaJaMa_Games implements EntryPoint {
 				panel.add(res);
 				RootPanel.get("genres").add(panel);	
 				
-				for(final Similar_game g: result.getResults().getSimilar_games()){
-					final Button similar = new Button(g.getName());
-					similar.addStyleName("list-group-item");
+				
+				output = "Juegos Similares:";
+				res = new HTML(output);
+				RootPanel.get("similar").add(res);
+				
+				List<Similar_game> juegosSimilares = result.getResults().getSimilar_games();
+				int n = juegosSimilares.size()>10 ? 10 : juegosSimilares.size();
+				for(i=0; i<n; i++){
+					final Similar_game g = juegosSimilares.get(i);
+					Button similar = new Button(g.getName());
 					similar.addClickHandler(new ClickHandler() {
 						
 						@Override
@@ -205,7 +212,9 @@ public class DaJaMa_Games implements EntryPoint {
 							
 						}
 					});
+					similar.setStyleName("juegosSimilares");
 					RootPanel.get("similar").add(similar);
+					
 				}
 				
 				/* Carousel Bootstrap */
@@ -242,7 +251,8 @@ public class DaJaMa_Games implements EntryPoint {
 				res = new HTML(output);
 				RootPanel.get("slider").add(res);
 				
-				/*************************/
+				/* *********************** */
+				
 				Integer id = appMap.get(params.get("juego").toLowerCase());
 				greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
 
