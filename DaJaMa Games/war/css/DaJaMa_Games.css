@@ -162,6 +162,9 @@ h1 {
 	color: red;
 }
 
+.hidden {
+	display: none;
+}
 
 #closeButton {
 	margin: 15px 6px 6px;

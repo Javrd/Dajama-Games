@@ -37,13 +37,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		Double res = null;
 		ClientResource cr = new ClientResource("http://store.steampowered.com/api/appdetails?appids="+id+"&filters=price_overview");
 		String str = cr.get(String.class);
-		if (!str.equals(null))
+		if (!str.equals("null"))
 			res = Integer.parseInt(str.split(",")[3].split(":")[1])/100.;
 		return res;
 	}
 	
 	public YoutubeSearch getYoutubeSearch(String juego){
-		ClientResource cr = new ClientResource("https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyD77694C-yaK1scKDrT2Oqx8SPh6Vhe2uM&q=allintitle:\"Gameplay "+juego+"\"");
+		ClientResource cr = new ClientResource("https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyD77694C-yaK1scKDrT2Oqx8SPh6Vhe2uM&q=Gameplay "+juego);
 		YoutubeSearch res = cr.get(YoutubeSearch.class);
 		return res;
 	}
