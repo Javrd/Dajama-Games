@@ -23,12 +23,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -103,6 +101,7 @@ public class DaJaMa_Games implements EntryPoint {
 			showBusqueda();
 		}else if(token=="principal"){
 			RootPanel.get("form").clear();
+			RootPanel.get("botonBuscar").clear();
 			RootPanel.get("busquedaCont").clear();
 			RootPanel.get("giantBomb").clear();
 			RootPanel.get("nombreGB").clear();
@@ -116,6 +115,7 @@ public class DaJaMa_Games implements EntryPoint {
 			showPrincipal();
 		}else if(token=="inicio"){
 			RootPanel.get("form").clear();
+			RootPanel.get("botonBuscar").clear();
 			RootPanel.get("busquedaCont").clear();
 			RootPanel.get("giantBomb").clear();
 			RootPanel.get("nombreGB").clear();
@@ -157,8 +157,11 @@ public class DaJaMa_Games implements EntryPoint {
 				panel= new HorizontalPanel();
 				panel.add(res);
 				RootPanel.get("giantBomb").add(panel);	
-				
-				output ="Description: <br>"+result.getResults().getDeck();
+
+				if (result.getResults().getDeck()!=null)
+					output ="Description: <br>"+result.getResults().getDeck();
+				else
+					output = "Description: <br> No description";
 				res = new HTML(output);
 				panel= new HorizontalPanel();
 				panel.add(res);
@@ -317,32 +320,12 @@ public class DaJaMa_Games implements EntryPoint {
 
 
 	private void showInicio() {
-		final Button boton = new Button("Send");
+		Button boton = getBotonSend();
 		final TextBox buscador = new TextBox();
-		buscador.setStyleName("buscador");
-		final HorizontalPanel panel = new HorizontalPanel();
+		
+		buscador.setStyleName("buscador");	
 		buscador.getElement().setPropertyString("placeholder", "Game to search");
-
-		boton.addStyleName("sendButton");
-
-		panel.add(buscador);
-		panel.add(boton);
-		
-		RootPanel.get("form").add(panel);
-
 		buscador.setFocus(true);
-		buscador.selectAll();
-		
-		boton.setStyleName("boton");
-		
-		boton.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				params.put("juego", buscador.getText());
-				controlador("busqueda");
-			}
-		});
 		buscador.addKeyUpHandler(new KeyUpHandler() {
 			
 			@Override
@@ -353,12 +336,37 @@ public class DaJaMa_Games implements EntryPoint {
 				}
 			}
 		});
-		
+
+		RootPanel.get("form").add(buscador);
+		RootPanel.get("botonBuscar").add(boton);
 	}
+
+
+	private Button getBotonSend() {
+		final Button res = new Button("Send");
+
+		res.setStyleName("sendButton");
+		res.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				params.put("juego", res.getText());
+				controlador("busqueda");
+			}
+		});
+		
+		return res;
+	}
+
+
 
 
 	private void showBusqueda() {
 		final String juego= params.get("juego");
+		System.out.println(juego);
+		HTML carga = new HTML("<img src='cargando.gif' height = '32'></img>");
+		RootPanel.get("botonBuscar").clear();
+		RootPanel.get("botonBuscar").add(carga);
 		greetingService.getGiantBomb(juego, new AsyncCallback<GiantBombSearch>(){
 
 			@Override
@@ -368,12 +376,13 @@ public class DaJaMa_Games implements EntryPoint {
 
 			@Override
 			public void onSuccess(GiantBombSearch result) {
-				// TODO Auto-generated method stub
+				Button boton = getBotonSend();
+				RootPanel.get("botonBuscar").clear();
+				RootPanel.get("botonBuscar").add(boton);
 				String output = "";
 				HTML res;
 				if(!result.getResults().isEmpty()){
 					for(final Result r: result.getResults()){
-
 					HorizontalPanel panel1= new HorizontalPanel();
 					HorizontalPanel panel2= new HorizontalPanel();
 					Button boton2 = new Button(r.getName());
@@ -388,7 +397,10 @@ public class DaJaMa_Games implements EntryPoint {
 							
 						}
 					});
-					output = "<div class='busq'>" +r.getDeck()+ "</div>";
+					if (r.getDeck()!=null)
+						output = "<div class='busq'>" +r.getDeck()+ "</div>";
+					else
+						output = "<div class='busq'> No description </div>";
 					res = new HTML(output);				
 					panel1.add(boton2);
 					panel2.add(res);
