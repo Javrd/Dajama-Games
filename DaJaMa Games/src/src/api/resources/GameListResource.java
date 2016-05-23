@@ -31,7 +31,7 @@ import src.domain.GameList;
 import src.repository.GameListRepository;
 import src.repository.MapGameListRepository;
 
-@Path("/lists")
+@Path("/GameList")
 public class GameListResource {
 
 	private static GameListResource _instance=null;
@@ -87,9 +87,9 @@ public class GameListResource {
 	}
 	
 	@GET
-	@Path("/{name}")
+	@Path("/{gameListName}")
 	@Produces("application/json")
-	public GameList get(@PathParam("name") String name){
+	public GameList get(@PathParam("gameListName") String name){
 		
 		GameList list = repository.get(name);
 		if(list == null){

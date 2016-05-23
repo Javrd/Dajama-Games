@@ -27,7 +27,7 @@ import src.domain.Game;
 import src.domain.GameList;
 
 
-@Path("lists/{GameListName}/games")
+@Path("GameList/{GameListName}/games")
 public class GameResource {
 
 	public static GameResource _instance=null;
@@ -98,7 +98,7 @@ public class GameResource {
 			}
 		}
 		
-		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
+		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "getGame");
 		URI uri = ub.build(pl.getName());
 		ResponseBuilder resp = Response.created(uri);
 		resp.entity(pl);		
@@ -109,7 +109,7 @@ public class GameResource {
 	@PUT
 	@Path("/{gameName}")
 	@Consumes("application/json")
-	public Response updateSong(@Context UriInfo uriInfo,@PathParam("GameListName") String gameListName, @PathParam("gameName") String gameName,Game game)
+	public Response updateGame(@Context UriInfo uriInfo,@PathParam("GameListName") String gameListName, @PathParam("gameName") String gameName,Game game)
 	{
 		GameList pl = GameListResource.getInstance().get(gameListName);
 		Game g = searchGame(pl, game.getName());
@@ -124,7 +124,7 @@ public class GameResource {
 	
 	@DELETE
 	@Path("/{gameName}")
-	public void removeSong(@PathParam("GameListName") String gameListName, @PathParam("gameName") String gameName) 
+	public void removeGame(@PathParam("GameListName") String gameListName, @PathParam("gameName") String gameName) 
 	{
 		GameList gl = GameListResource.getInstance().get(gameListName);
 		Game g = searchGame(gl, gameName);
