@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -40,12 +41,14 @@ public class DaJaMa_Games implements EntryPoint {
 	
 	private final Map<String, Integer> appMap = getIdMapSteam();
 	private static Map<String, String> params = new HashMap<>();
+	private TextBox inputBuscar;
 
 	/**
 	 * This is the entry point method.
 	 */
+	
 	public void onModuleLoad() {
-		
+		showInicio();
 		final Button botonCabecera = new Button("DaJaMa Games");
 		botonCabecera.setStyleName("gwt-HeaderButton");
 		botonCabecera.addClickHandler(new ClickHandler() {
@@ -59,7 +62,6 @@ public class DaJaMa_Games implements EntryPoint {
 		final HorizontalPanel panel = new HorizontalPanel();
 		panel.add(botonCabecera);
 		RootPanel.get("head").add(panel);
-		showInicio();
 	}
 	
 	
@@ -100,6 +102,8 @@ public class DaJaMa_Games implements EntryPoint {
 			RootPanel.get("youtube").clear();
 			showBusqueda();
 		}else if(token=="principal"){
+			RootPanel.get("formCont").addStyleName("hidden");
+			RootPanel.get("busquedaCont").addStyleName("hidden");
 			RootPanel.get("form").clear();
 			RootPanel.get("botonBuscar").clear();
 			RootPanel.get("busquedaCont").clear();
@@ -212,7 +216,6 @@ public class DaJaMa_Games implements EntryPoint {
 							params.put("idGB", g.getId()+"");
 							params.put("juego", g.getName());
 							controlador("principal");
-							
 						}
 					});
 					similar.setStyleName("juegosSimilares");
@@ -257,31 +260,38 @@ public class DaJaMa_Games implements EntryPoint {
 				/* *********************** */
 				
 				Integer id = appMap.get(params.get("juego").toLowerCase());
-				greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
+				if (id!=null) {
+					greetingService.getSteamPrice(id,new AsyncCallback<Double>(){
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-					}
 						@Override
-					public void onSuccess(Double result) {
-						// TODO Auto-generated method stub
-							String output = "";
-							
-							if(result!=null){		
-									
-								output += "<p> Precio del juego en Steam:<br>" +result + " &#128;</p>";
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+						}
+							@Override
+						public void onSuccess(Double result) {
+							// TODO Auto-generated method stub
+								String output = "";
 								
-							}else{
-								output="<span> No results </span>";
-							}
-							HTML res = new HTML(output);
-							final HorizontalPanel panel2= new HorizontalPanel();
-							panel2.add(res);
-							RootPanel.get("SteamPrice").add(panel2);
-					}
+								if(!result.equals(null)){		
+										
+									output += "<p> Steam Price:<br>" +result + " &#128;</p>";
+									
+								}
+								HTML res = new HTML(output);
+								final HorizontalPanel panel2= new HorizontalPanel();
+								panel2.add(res);
+								RootPanel.get("SteamPrice").add(panel2);
+						}
+						
+					});
+				} else {
+					output = "<p> Steam Price:<br> Unavailable </p>";
+					res = new HTML(output);
+					final HorizontalPanel panel2= new HorizontalPanel();
+					panel2.add(res);
+					RootPanel.get("SteamPrice").add(panel2);
+				}
 					
-				});
 			}
 			
 		});
@@ -320,29 +330,35 @@ public class DaJaMa_Games implements EntryPoint {
 
 
 	private void showInicio() {
-		Button boton = getBotonSend();
-		final TextBox buscador = new TextBox();
+		RootPanel.get("formCont").removeStyleName("hidden");
+		RootPanel.get("busquedaCont").removeStyleName("hidden");
 		
-		buscador.setStyleName("buscador");	
-		buscador.getElement().setPropertyString("placeholder", "Game to search");
-		buscador.setFocus(true);
-		buscador.addKeyUpHandler(new KeyUpHandler() {
+		inputBuscar = new TextBox();
+		
+		inputBuscar.setStyleName("buscador");	
+		inputBuscar.getElement().setPropertyString("placeholder", "Game to search");
+		inputBuscar.getElement().setId("inputBuscador");
+		inputBuscar.addKeyUpHandler(new KeyUpHandler() {
 			
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode()==KeyCodes.KEY_ENTER){
-					params.put("juego", buscador.getText());
+					params.put("juego", inputBuscar.getText());
 					controlador("busqueda");
 				}
 			}
 		});
 
-		RootPanel.get("form").add(buscador);
+		Button boton = getBotonSend(inputBuscar);
+		
+		RootPanel.get("form").add(inputBuscar);
 		RootPanel.get("botonBuscar").add(boton);
+		inputBuscar.setFocus(true);
+		inputBuscar.selectAll();
 	}
 
 
-	private Button getBotonSend() {
+	private Button getBotonSend(final TextBox buscador) {
 		final Button res = new Button("Send");
 
 		res.setStyleName("sendButton");
@@ -350,7 +366,7 @@ public class DaJaMa_Games implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				params.put("juego", res.getText());
+				params.put("juego", buscador.getText());
 				controlador("busqueda");
 			}
 		});
@@ -362,11 +378,13 @@ public class DaJaMa_Games implements EntryPoint {
 
 
 	private void showBusqueda() {
+		RootPanel.get("formCont").removeStyleName("hidden");
+		RootPanel.get("busquedaCont").removeStyleName("hidden");
 		final String juego= params.get("juego");
-		System.out.println(juego);
 		HTML carga = new HTML("<img src='cargando.gif' height = '32'></img>");
 		RootPanel.get("botonBuscar").clear();
 		RootPanel.get("botonBuscar").add(carga);
+		inputBuscar.getElement().setAttribute("disabled", "disabled");
 		greetingService.getGiantBomb(juego, new AsyncCallback<GiantBombSearch>(){
 
 			@Override
@@ -376,9 +394,12 @@ public class DaJaMa_Games implements EntryPoint {
 
 			@Override
 			public void onSuccess(GiantBombSearch result) {
-				Button boton = getBotonSend();
+				
+				Button boton = getBotonSend(inputBuscar);
 				RootPanel.get("botonBuscar").clear();
 				RootPanel.get("botonBuscar").add(boton);
+				inputBuscar.getElement().removeAttribute("disabled");
+				inputBuscar.selectAll();
 				String output = "";
 				HTML res;
 				if(!result.getResults().isEmpty()){
