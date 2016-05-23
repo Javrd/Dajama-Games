@@ -1,0 +1,301 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DaJaMa Api",
+        "description": "API que ofrece una manera de gestionar tus juegos favoritos",
+        "version": "1.0.0"
+    },
+    "host": "1-dot-dajama-games.appspot.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/GameList": {
+            "get": {
+                "summary": "Listas de juegos",
+                "description": "Devuelve todas las listas de juegos\n",
+                "responses": {
+                    "200": {
+                        "description": "Un array de Juegos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/game"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crear lista de juego",
+                "description": "Crea una lista de juego para un usuario\n",
+                "responses": {
+                    "201": {
+                        "description": "Lista de juegos creada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "444": {
+                        "description": "Nombre de la lista ya existente"
+                    }
+                }
+            }
+        },
+        "/GameList/{gameListName}": {
+            "get": {
+                "summary": "Lista de juego específica",
+                "description": "Devuelve una lista de juegos deseada\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista a obtener información",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un array de Juegos",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "$ref": "#/definitions/game"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Modificar una lista",
+                "description": "Modifica una lista de juegos existente\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista que desea modificar",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Lista modificada"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Eliminar una lista",
+                "description": "Elimina una lista de juegos existente\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista que desea eliminar",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Lista eliminada"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            }
+        },
+        "/GameList/{GameListName}/games": {
+            "get": {
+                "summary": "Juegos de una lista",
+                "description": "Devuelve todas los juegos de una lista\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista a obtener información",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de juegos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/game"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Añade nuevo juego",
+                "description": "Añade un nuevo juego a una lista existente\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista a obtener información",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Juego añadido"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    },
+                    "444": {
+                        "description": "Juego ya añadido"
+                    }
+                }
+            }
+        },
+        "/GameList/{GameListName}/games/{GameName}": {
+            "get": {
+                "summary": "Juego de una lista",
+                "description": "Devuelve el juego especificado de una lista concreta\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista donde esta el juego",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "gameName",
+                        "in": "query",
+                        "description": "Nombre del juego a obtener informacion",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Juego"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Modifica un juego",
+                "description": "Modifica un juego concreto de una lista especificada\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista donde esta el juego",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "gameName",
+                        "in": "query",
+                        "description": "Nombre del juego a modificar",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Juego modificado"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Elimina un juego",
+                "description": "Elimina un juego de una lista especificada\n",
+                "parameters": [
+                    {
+                        "name": "gameListName",
+                        "in": "query",
+                        "description": "Nombre de la lista donde esta el juego",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "gameName",
+                        "in": "query",
+                        "description": "Nombre del juego a eliminar",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Juego borrado"
+                    },
+                    "404": {
+                        "description": "Lista no encontrada"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "game": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Nombre del juego en giantBomb."
+                },
+                "value": {
+                    "type": "double",
+                    "description": "Valoración del dueño de la lista al juego."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
