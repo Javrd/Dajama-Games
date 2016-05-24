@@ -94,7 +94,7 @@ public class GameResource {
 			if(searchGame(pl, game.getName())==null){
 				pl.getGames().add(game);
 			}else{
-				throw new AlreadyExistsException("Este juego ya está en la lista");
+				throw new AlreadyExistsException("This game is already in this list");
 			}
 		}
 		
