@@ -61,7 +61,7 @@ public class GameListResource {
 		lol.setScore(9);
 		GameList marGameList = new GameList();
 		marGameList.setName("MarchenaGameList");
-		marGameList.setDescription("La mejor GameList de la vida");
+		marGameList.setDescription("Best GameList ever");
 		marGameList.getGames().add(overwatch);
 		marGameList.getGames().add(lol);
 		repository.put(marGameList);
@@ -73,10 +73,22 @@ public class GameListResource {
 		Game stardew = new Game("Stardew Valley",9);
 		GameList javGameList = new GameList();
 		javGameList.setName("JaviGameList");
-		javGameList.setDescription("Una mas del montón");
+		javGameList.setDescription("Not worth to read");
 		javGameList.getGames().add(monkey);
 		javGameList.getGames().add(stardew);
 		repository.put(javGameList);
+		
+		//PlayList Dani
+		Game ds = new Game();
+		ds.setName("Dark Souls III");
+		ds.setScore(10);
+		Game witcher = new Game("The Witcher 3",10);
+		GameList daniGameList = new GameList();
+		daniGameList.setName("DaniGameList");
+		daniGameList.setDescription("Hardcore List");
+		daniGameList.getGames().add(ds);
+		daniGameList.getGames().add(witcher);
+		repository.put(daniGameList);
 		
 	}
 	
